@@ -1,0 +1,3 @@
+export const AUTH_TYPE = {
+    SET_INTRO_SLIDER_DONE: 'SET_INTRO_SLIDER_DONE',
+}
