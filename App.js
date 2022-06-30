@@ -10,24 +10,24 @@ import React from 'react';
 import {
   StyleSheet,
 } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@rneui/themed';
-import { persistor, Store } from './src/redux/Store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { theme } from './src/styles/theme';
+import AuthNavigator from './src/views/auth/AuthNavigator';
+import { persistor, Store } from './src/redux/store';
 
-
+import { NavigationContainer } from '@react-navigation/native';
 
 const App = () => {
 
 
   return (
-    <SafeAreaProvider>
+    <NavigationContainer>
       <ThemeProvider theme={theme}>
-
+        <AuthNavigator />
       </ThemeProvider>
-    </SafeAreaProvider>
+    </NavigationContainer>
   );
 };
 
