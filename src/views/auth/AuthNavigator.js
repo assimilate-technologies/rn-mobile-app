@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './LoginScreen';
 import AppIntroScreen from './AppIntroScreen';
-import { useSelector, useDispatch } from 'react-redux'
-import { setIntroSliderComplete } from '../../redux/actions/authAction';
+import { useSelector } from 'react-redux'
+import VerificationScreen from './VerificationScreen';
+// import HomeScreen from '../layout/HomeScreen';
+import LayoutNavigator from '../layout/LayoutNavigator';
 
 const RouteStack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
     const {
-        introSliderCompleted,
+        introSliderCompleted, isAuthenticated
     } = useSelector(state => state.auth)
 
+    if (isAuthenticated) {
+        return <LayoutNavigator />
+    }
     return (
         <RouteStack.Navigator screenOptions={
             {
@@ -19,12 +24,13 @@ const AuthNavigator = () => {
                 headerShown: false,
             }
         }>
+
             {
-                !introSliderCompleted ? <RouteStack.Screen name="appIntroScreen" component={AppIntroScreen} />
-                    : <RouteStack.Screen name="loginScreen" component={LoginScreen} />
+                !introSliderCompleted ?
+                    <RouteStack.Screen name="appIntroScreen" component={AppIntroScreen} />
+                    : <><RouteStack.Screen name="loginScreen" component={LoginScreen} />
+                        <RouteStack.Screen name="verificationScreen" component={VerificationScreen} /></>
             }
-
-
         </RouteStack.Navigator>
     );
 }

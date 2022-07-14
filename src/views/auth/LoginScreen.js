@@ -5,8 +5,9 @@ import { Button, useTheme } from "@rneui/themed";
 import { Divider, Input, ListItem } from "@rneui/base";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CountryCodePicker from "../../shared/components/CountryCodePicker";
+import api from "../../api/api";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const { theme } = useTheme();
     const refRBSheet = useRef();
     const [countryCode, setContryCode] = useState({
@@ -17,12 +18,28 @@ const LoginScreen = () => {
         'code': 'IN',
         'flag': '🇮🇳',
     });
+    const [phoneNumber, setPhoneNumber] = useState("");
     const selectContryCode = (item) => {
         setContryCode(item);
         refRBSheet?.current?.close()
     }
-    const onContinue = () => {
-        // navigation.replace("loginScreen");
+    const onContinue = async () => {
+        try {
+            if (phoneNumber) {
+                let response = await api.login({ phoneNumber: `${countryCode.dial_code}${phoneNumber}` });
+                console.log(response?.data);
+                if (response?.data?.data) {
+                    navigation.navigate("verificationScreen", {
+                        token: response?.data?.data,
+                        phoneNumber: `${countryCode.dial_code}${phoneNumber}`
+                    });
+
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     return (
         <SafeAreaView style={commonStyle.containerCenter}>
@@ -32,6 +49,7 @@ const LoginScreen = () => {
                     keyboardType="phone-pad"
                     maxLength={10}
                     placeholder=""
+                    onChangeText={(value) => setPhoneNumber(value)}
                     leftIcon={
                         <TouchableOpacity
                             onPress={() => refRBSheet && refRBSheet?.current?.open()}
@@ -44,8 +62,8 @@ const LoginScreen = () => {
                     onSelect={selectContryCode} countryCode={countryCode}
                 />
 
-                <Button onPress={onContinue} title="CONTINUE" buttonStyle={{ borderRadius: 12, height: 50 }}
-                    containerStyle={{ borderRadius: 12, height: 50 }} color={theme.colors.primary} />
+                <Button onPress={() => onContinue()} title="CONTINUE" buttonStyle={{ borderRadius: 12, height: 50 }}
+                    containerStyle={{ borderRadius: 12, }} color={theme.colors.primary} />
 
                 <Text style={{}}>
                     We never share this with anyone and it won’t be on your profile

@@ -15,6 +15,12 @@ const authReducer = (state = initialState, action) => {
                 introSliderCompleted: true,
             }
         }
+        case AUTH_TYPE.SET_AUTH: {
+            return {
+                ...state,
+                isAuthenticated: true,
+            }
+        }
         default:
             return state;
     }
