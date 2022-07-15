@@ -1,9 +1,11 @@
 import React from 'react';
-import HomeScreen from '../layout/HomeScreen';
+import HomeScreen from './home/HomeScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainTabScreen from './MainTabScreen';
+import EditProfileScreen from './profile/EditProfileScreen';
 
 const RouteStack = createNativeStackNavigator();
-const LayoutNavigator = ({}) => {
+const LayoutNavigator = ({ }) => {
 
     return (
         <RouteStack.Navigator screenOptions={
@@ -12,7 +14,8 @@ const LayoutNavigator = ({}) => {
                 headerShown: false,
             }
         }>
-            <RouteStack.Screen name="homeScreen" component={HomeScreen} />
+            <RouteStack.Screen name="homeScreen" component={MainTabScreen} />
+            <RouteStack.Screen name="editProfileScreen" component={EditProfileScreen} />
         </RouteStack.Navigator>
     );
 }
