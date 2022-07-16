@@ -4,5 +4,6 @@ export const BASE_ROUTES = {
     HEALTH_CHECK: `${BASE_URL}healthcheck`,
     AUTH: `${BASE_URL}auth`,
     USERS: `${BASE_URL}users`,
+    TRANSACTION: `${BASE_URL}transaction`,
 };
 export const API_URL = "http://localhost:9000"

@@ -5,6 +5,7 @@ const initialState = {
     isAuthenticated: false,
     userInfo: {},
     errorData: null,
+    walletAmount: 0,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -19,6 +20,18 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: true,
+            }
+        }
+        case AUTH_TYPE.SET_USER: {
+            return {
+                ...state,
+                userInfo: action?.payload,
+            }
+        }
+        case AUTH_TYPE.SET_WALLET: {
+            return {
+                ...state,
+                walletAmount: action?.payload || 0,
             }
         }
         default:

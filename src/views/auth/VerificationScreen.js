@@ -6,17 +6,18 @@ import { useDispatch } from 'react-redux';
 import { setAuth } from "../../redux/actions/authAction";
 import { Input } from "@rneui/base";
 import api from "../../api/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const VerificationScreen = ({ navigation, route: { params } }) => {
     const { theme } = useTheme();
     const dispatch = useDispatch();
     const [otp, setOtp] = useState("");
-    console.log(params);
     const onContinue = async () => {
         try {
             if (otp) {
                 let response = await api.verify({ phoneNumber: params?.phoneNumber, otp, verificationKey: params?.token });
-                console.log(response?.data);
                 if (response?.data?.data) {
+                    await AsyncStorage.setItem('accessToken', response?.data?.data?.accessToken)
+                    await AsyncStorage.setItem('refreshToken', response?.data?.data?.refreshToken)
                     dispatch(setAuth());
                 }
             }
