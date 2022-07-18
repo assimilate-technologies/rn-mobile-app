@@ -16,7 +16,14 @@ const LayoutNavigator = ({ }) => {
     }, [])
     const getUser = async () => {
         const { data } = await api.getUser();
-        dispatch(setUser(data));
+        const res = await api.getUserDetail();
+        console.log(res?.data);
+        if (res?.data) {
+            dispatch(setUser({ ...data, ...res?.data }));
+        } else {
+            dispatch(setUser({ ...data }));
+
+        }
     }
     const getUserWallet = async () => {
         const { data } = await api.getWalletAmount();

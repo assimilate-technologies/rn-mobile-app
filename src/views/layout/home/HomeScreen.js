@@ -75,8 +75,8 @@ const HomeScreen = ({ navigation }) => {
         refRBSheet && refRBSheet.current.close();
     }
     return (
-        <SafeAreaView>
-            <Header containerStyle={{ height: 80 }} />
+        <SafeAreaView style={{ backgroundColor: "#fff", flex: 1 }}>
+            <Header color={theme.colors.primary} containerStyle={{ height: 80 }} />
             <View style={{
                 flexDirection: "row", height: 60, marginHorizontal: 25, marginVertical: 15, elevation: 2, backgroundColor: "#FFF",
                 borderRadius: 10

@@ -23,10 +23,30 @@ const paymentUpdate = (payload) => {
     return axios.post(url, payload);
 }
 
-const getWalletAmount = (payload) => {
+const getWalletAmount = () => {
     const url = `${API_URL}${BASE_ROUTES.TRANSACTION}/payment/wallet`;
     return axios.get(url);
 }
+const getUserDetail = (payload) => {
+    const url = `${API_URL}${BASE_ROUTES.USERS}/user-detail`;
+    return axios.get(url);
+}
+const handleCreateUserDetails = (payload) => {
+    const url = `${API_URL}${BASE_ROUTES.USERS}/user-detail`;
+    return axios.post(url,payload);
+}
+const handleUpdateUserDetails = (payload) => {
+    const url = `${API_URL}${BASE_ROUTES.USERS}/user-detail/update`;
+    return axios.post(url,payload);
+}
+const handleUpdateUIDAIPATH = (payload) => {
+    const url = `${API_URL}${BASE_ROUTES.USERS}/user-detail/update-uidai`;
+    return axios.post(url,payload);
+}
 export default {
-    login, verify, payment, paymentUpdate, getUser, getWalletAmount
+    login, verify, payment, paymentUpdate, getUser, getWalletAmount,
+    getUserDetail,
+    handleCreateUserDetails,
+    handleUpdateUserDetails,
+    handleUpdateUIDAIPATH
 }

@@ -24,6 +24,7 @@
     "react-native": "0.69.0",
     "react-native-app-intro-slider": "4.0.4",
     "react-native-device-info": "9.0.2",
+    "react-native-document-picker": "^8.1.1",
     "react-native-eject": "0.1.2",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-razorpay": "^2.2.9",
