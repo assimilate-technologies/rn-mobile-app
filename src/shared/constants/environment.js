@@ -7,3 +7,5 @@ export const BASE_ROUTES = {
     TRANSACTION: `${BASE_URL}transaction`,
 };
 export const API_URL = "http://localhost:9000"
+
+export const AUTH_API_URL = "https://service-dev.waiu.co.in/api/";

@@ -17,9 +17,9 @@ const LayoutNavigator = ({ }) => {
     const getUser = async () => {
         const { data } = await api.getUser();
         const res = await api.getUserDetail();
-        console.log(res?.data);
         if (res?.data) {
-            dispatch(setUser({ ...data, ...res?.data }));
+            const { id, ...others } = res?.data;
+            dispatch(setUser({ ...data, ...others }));
         } else {
             dispatch(setUser({ ...data }));
 

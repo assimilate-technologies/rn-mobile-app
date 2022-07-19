@@ -7,6 +7,7 @@ export let refreshTokenData = {
 };
 
 const axiosInstance = axios.create();
+export const axiosInstance1 = axios.create();
 
 axiosInstance.interceptors.request.use(
     async (conf) => {

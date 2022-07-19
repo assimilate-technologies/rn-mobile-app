@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Text, SafeAreaView, View } from "react-native";
 import commonStyle from "../../../styles/commonStyle";
 import { Button, useTheme, Header } from "@rneui/themed";
@@ -8,9 +8,11 @@ import RazorpayCheckout from 'react-native-razorpay';
 import { setWalletAmount } from "../../../redux/actions/authAction";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Input } from "@rneui/base";
+import { useIsFocused } from "@react-navigation/native";
 const HomeScreen = ({ navigation }) => {
     const { theme } = useTheme();
     const refRBSheet = useRef();
+    const isFocused = useIsFocused();
     const {
         userInfo, walletAmount
     } = useSelector(state => state.auth)
@@ -61,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
             if (paymentStats && !paymentStats?.data?.failed) {
                 alert("Wallet amount add successfuly....!")
                 getUserWallet();
-            }else{
+            } else {
                 alert("Transaction failed....!")
             }
 
@@ -74,6 +76,13 @@ const HomeScreen = ({ navigation }) => {
         dispatch(setWalletAmount(data?.amount || 0));
         refRBSheet && refRBSheet.current.close();
     }
+    useEffect(() => {
+        console.log(userInfo?.userId);
+        if(!userInfo?.userId){
+            navigation.navigate("Profile");
+        }
+        
+    }, [isFocused])
     return (
         <SafeAreaView style={{ backgroundColor: "#fff", flex: 1 }}>
             <Header color={theme.colors.primary} containerStyle={{ height: 80 }} />
